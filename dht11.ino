@@ -39,9 +39,10 @@ void loop() {
   Serial.print(" *C | ");
   Serial.print("Humidity: "); 
   Serial.println(humidity);
-  int x = ThingSpeak.writeField(channelNumber, 1, temperature, writeAPIKey);
-  int y = ThingSpeak.writeField(channelNumber, 2, humidity, writeAPIKey);
-  if(x == 200 && y == 200){
+  ThingSpeak.setField(1, temperature);
+  ThingSpeak.setField(2, humidity);
+  int x = ThingSpeak.writeField(channelNumber, writeAPIKey);
+  if(x == 200){
     Serial.println("Channel update successful " + String(x));
   } else {
     Serial.println("Problem updating channel. HTTP error code " + String(x));
